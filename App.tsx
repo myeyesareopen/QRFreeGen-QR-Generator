@@ -418,15 +418,17 @@ const App: React.FC = () => {
                   </Button>
                 </div>
 
-                 <Button 
-                  variant="outline" 
-                  className="w-full border-green-200 hover:bg-green-50 text-green-700"
-                  onClick={handleShare}
-                  isLoading={isSharing}
-                  icon={isSharing ? null : <UploadCloud className="w-4 h-4" />}
-                >
-                  {isSharing ? t.sharing : t.shareBtn}
-                </Button>
+                {!shareUrl && (
+                  <Button 
+                    variant="outline" 
+                    className="w-full border-green-200 hover:bg-green-50 text-green-700"
+                    onClick={handleShare}
+                    isLoading={isSharing}
+                    icon={isSharing ? null : <UploadCloud className="w-4 h-4" />}
+                  >
+                    {isSharing ? t.sharing : t.shareBtn}
+                  </Button>
+                )}
               </div>
             )}
           </div>
