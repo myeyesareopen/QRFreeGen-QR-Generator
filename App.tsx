@@ -12,7 +12,6 @@ import {
   Image as ImageIcon, 
   Zap, 
   Trash2,
-  Github,
   Globe,
   UploadCloud
 } from 'lucide-react';
