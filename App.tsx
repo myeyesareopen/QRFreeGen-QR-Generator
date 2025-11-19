@@ -29,6 +29,7 @@ interface ShareDataResponse extends ShareResponse {
 const App: React.FC = () => {
   const [inputValue, setInputValue] = useState<string>('');
   const [generatedQR, setGeneratedQR] = useState<QRCodeResult | null>(null);
+  const [qrContent, setQrContent] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const [toast, setToast] = useState<{ message: string; type: 'success' | 'error' } | null>(null);
@@ -97,12 +98,18 @@ const App: React.FC = () => {
           dataUrl: data.dataUrl,
           svgString: data.svgString
         });
+        if (typeof data.text === 'string') {
+          setQrContent(data.text);
+        } else {
+          setQrContent('');
+        }
         setShareUrl(data.url);
       } catch (err) {
         if (!cancelled) {
           setError(t.shareExpired);
           setGeneratedQR(null);
           setShareUrl(null);
+          setQrContent('');
         }
       } finally {
         if (!cancelled) {
@@ -137,6 +144,7 @@ const App: React.FC = () => {
       await new Promise(resolve => setTimeout(resolve, 300));
       const result = await generateQRCode(inputValue);
       setGeneratedQR(result);
+      setQrContent(inputValue);
     } catch (err) {
       setError(t.errorGen);
     } finally {
@@ -147,6 +155,7 @@ const App: React.FC = () => {
   const handleClear = () => {
     setInputValue('');
     setGeneratedQR(null);
+    setQrContent('');
     setShareUrl(null);
     setError(null);
   };
@@ -322,7 +331,7 @@ const App: React.FC = () => {
                         />
                       </div>
                       <p className="mt-6 text-xs text-slate-400 font-mono text-center break-all line-clamp-1 px-4 w-full">
-                        {inputValue}
+                        {qrContent}
                       </p>
                       
                       {/* Share Link Display */}
