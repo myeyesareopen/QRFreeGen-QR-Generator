@@ -46,9 +46,13 @@ export interface Translation {
   shareSuccess: string;
   shareFail: string;
   sharing: string;
+  shareValidity: string;
+  shareExpired: string;
 }
 
 export interface ShareResponse {
   id: string;
   url: string;
+  expiresIn?: number;
+  expiresAt?: number;
 }

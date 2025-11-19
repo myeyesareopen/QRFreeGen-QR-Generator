@@ -44,6 +44,8 @@ export const translations: Record<LanguageCode, Translation> = {
     shareSuccess: 'Link copied to clipboard!',
     shareFail: 'Failed to upload to cloud',
     sharing: 'Uploading...',
+    shareValidity: 'Link stays active for 7 days.',
+    shareExpired: 'This shared link has expired or is invalid.',
   },
   zh: {
     appTitle: 'QRFreeGen',
@@ -75,6 +77,8 @@ export const translations: Record<LanguageCode, Translation> = {
     shareSuccess: '链接已复制到剪贴板！',
     shareFail: '上传失败，请检查网络',
     sharing: '上传中...',
+    shareValidity: '该分享链接自生成起有效期为7天。',
+    shareExpired: '分享链接已失效或不存在。',
   },
   es: {
     appTitle: 'QRFreeGen',
@@ -106,6 +110,8 @@ export const translations: Record<LanguageCode, Translation> = {
     shareSuccess: '¡Enlace copiado al portapapeles!',
     shareFail: 'Error al subir',
     sharing: 'Subiendo...',
+    shareValidity: 'El enlace permanece activo durante 7 días.',
+    shareExpired: 'Este enlace compartido ha expirado o no es válido.',
   },
   hi: {
     appTitle: 'QRFreeGen',
@@ -137,6 +143,8 @@ export const translations: Record<LanguageCode, Translation> = {
     shareSuccess: 'लिंक क्लिपबोर्ड पर कॉपी किया गया!',
     shareFail: 'अपलोड करने में विफल',
     sharing: 'अपलोड हो रहा है...',
+    shareValidity: 'यह लिंक 7 दिनों तक सक्रिय रहता है।',
+    shareExpired: 'यह साझा लिंक समाप्त हो गया है या अमान्य है।',
   },
   ar: {
     appTitle: 'QRFreeGen',
@@ -168,6 +176,8 @@ export const translations: Record<LanguageCode, Translation> = {
     shareSuccess: 'تم نسخ الرابط إلى الحافظة!',
     shareFail: 'فشل الرفع',
     sharing: 'جاري الرفع...',
+    shareValidity: 'يظل الرابط صالحًا لمدة 7 أيام.',
+    shareExpired: 'انتهت صلاحية رابط المشاركة هذا أو أنه غير صالح.',
   },
   pt: {
     appTitle: 'QRFreeGen',
@@ -199,6 +209,8 @@ export const translations: Record<LanguageCode, Translation> = {
     shareSuccess: 'Link copiado para a área de transferência!',
     shareFail: 'Falha ao enviar',
     sharing: 'Enviando...',
+    shareValidity: 'O link fica ativo por 7 dias.',
+    shareExpired: 'Este link compartilhado expirou ou é inválido.',
   },
   bn: {
     appTitle: 'QRFreeGen',
@@ -230,6 +242,8 @@ export const translations: Record<LanguageCode, Translation> = {
     shareSuccess: 'লিঙ্ক ক্লিপবোর্ডে কপি করা হয়েছে!',
     shareFail: 'আপলোড করতে ব্যর্থ',
     sharing: 'আপলোড হচ্ছে...',
+    shareValidity: 'লিঙ্কটি ৭ দিন সক্রিয় থাকবে।',
+    shareExpired: 'এই শেয়ার লিঙ্কটির মেয়াদ শেষ হয়েছে বা এটি অবৈধ।',
   },
   ru: {
     appTitle: 'QRFreeGen',
@@ -261,6 +275,8 @@ export const translations: Record<LanguageCode, Translation> = {
     shareSuccess: 'Ссылка скопирована!',
     shareFail: 'Ошибка загрузки',
     sharing: 'Загрузка...',
+    shareValidity: 'Ссылка активна в течение 7 дней.',
+    shareExpired: 'Эта ссылка недоступна или срок её истёк.',
   },
   ja: {
     appTitle: 'QRFreeGen',
@@ -292,6 +308,8 @@ export const translations: Record<LanguageCode, Translation> = {
     shareSuccess: 'リンクをコピーしました！',
     shareFail: 'アップロード失敗',
     sharing: 'アップロード中...',
+    shareValidity: 'リンクの有効期限は7日です。',
+    shareExpired: 'この共有リンクは無効または期限切れです。',
   },
   fr: {
     appTitle: 'QRFreeGen',
@@ -323,5 +341,7 @@ export const translations: Record<LanguageCode, Translation> = {
     shareSuccess: 'Lien copié !',
     shareFail: 'Échec de l\'envoi',
     sharing: 'Envoi en cours...',
+    shareValidity: 'Le lien reste actif pendant 7 jours.',
+    shareExpired: 'Ce lien partagé a expiré ou est invalide.',
   },
 };

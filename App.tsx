@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useEffect } from 'react';
-import { QRCodeResult, LanguageCode } from './types';
+import { QRCodeResult, LanguageCode, ShareResponse } from './types';
 import { generateQRCode } from './services/qrService';
 import Button from './components/Button';
 import { Toast } from './components/Toaster';
@@ -16,6 +16,12 @@ import {
   Globe,
   UploadCloud
 } from 'lucide-react';
+
+interface ShareDataResponse extends ShareResponse {
+  dataUrl: string;
+  svgString: string;
+  text?: string;
+}
 
 const App: React.FC = () => {
   const [inputValue, setInputValue] = useState<string>('');
@@ -52,6 +58,54 @@ const App: React.FC = () => {
     document.documentElement.dir = langConfig?.dir || 'ltr';
     localStorage.setItem('qrfreegen_lang', currentLang);
   }, [currentLang, t]);
+
+  // Load shared QR if visiting via ?share=ID link
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const shareParam = params.get('share');
+    if (!shareParam) {
+      return;
+    }
+
+    let cancelled = false;
+    setLoading(true);
+    setError(null);
+
+    const loadSharedQr = async () => {
+      try {
+        const response = await fetch(`/api/share?id=${shareParam}`);
+        if (!response.ok) {
+          throw new Error('Share not found');
+        }
+        const data: ShareDataResponse = await response.json();
+        if (!data.dataUrl || !data.svgString) {
+          throw new Error('Invalid share data');
+        }
+        if (cancelled) return;
+        setGeneratedQR({
+          dataUrl: data.dataUrl,
+          svgString: data.svgString
+        });
+        setShareUrl(data.url);
+      } catch (err) {
+        if (!cancelled) {
+          setError(t.shareExpired);
+          setGeneratedQR(null);
+          setShareUrl(null);
+        }
+      } finally {
+        if (!cancelled) {
+          setLoading(false);
+        }
+      }
+    };
+
+    loadSharedQr();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [currentLang, t.shareExpired]);
 
   const showToast = (message: string, type: 'success' | 'error' = 'success') => {
     setToast({ message, type });
@@ -144,7 +198,7 @@ const App: React.FC = () => {
 
       if (!response.ok) throw new Error('Network response was not ok');
 
-      const data: { url: string } = await response.json();
+      const data: ShareResponse = await response.json();
       setShareUrl(data.url);
       
       // Auto copy to clipboard
@@ -306,7 +360,8 @@ const App: React.FC = () => {
                   {/* Share Link Display */}
                   {shareUrl && (
                      <div className="mt-4 w-full bg-green-50 border border-green-100 rounded-lg p-3 animate-in slide-in-from-top-2">
-                        <p className="text-xs font-medium text-green-700 mb-1 text-center">{t.shareDesc}</p>
+                        <p className="text-xs font-medium text-green-700 text-center">{t.shareDesc}</p>
+                        <p className="text-[11px] text-green-500 text-center mb-2">{t.shareValidity}</p>
                         <div className="flex items-center gap-2 bg-white border border-green-200 rounded px-2 py-1.5">
                           <input 
                             readOnly 
