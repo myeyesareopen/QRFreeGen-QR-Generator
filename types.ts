@@ -16,12 +16,23 @@ export type DownloadFormat = 'png' | 'svg';
 
 export type LanguageCode = 'en' | 'zh' | 'es' | 'hi' | 'ar' | 'pt' | 'bn' | 'ru' | 'ja' | 'fr';
 
+export interface FAQItem {
+  question: string;
+  answer: string;
+}
+
 export interface Translation {
   appTitle: string;
   howItWorks: string;
   heroTitleStart: string;
   heroTitleEnd: string;
   heroDesc: string;
+  browserInfoTitle: string;
+  browserInfoDesc: string;
+  cloudShareInfo: string;
+  howItWorksSteps: string[];
+  faqTitle: string;
+  faqItems: FAQItem[];
   inputLabel: string;
   inputPlaceholder: string;
   generateBtn: string;
