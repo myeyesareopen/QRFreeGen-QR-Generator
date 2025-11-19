@@ -23,8 +23,6 @@ const SiteHeader: React.FC<SiteHeaderProps> = ({
           <h1 className="text-xl font-bold text-slate-800 tracking-tight">
             <a
               href="https://qrfreegen.com"
-              target="_blank"
-              rel="noopener noreferrer"
               className="flex items-baseline gap-1 hover:text-green-700 transition-colors"
             >
               {t.appTitle}
