@@ -249,15 +249,6 @@ const App: React.FC = () => {
                 </svg>
               </div>
             </div>
-
-            <a 
-              href="https://github.com" 
-              target="_blank" 
-              rel="noreferrer"
-              className="p-2 text-slate-400 hover:text-slate-800 transition-colors hidden sm:block"
-            >
-              <Github className="w-5 h-5" />
-            </a>
           </div>
         </div>
       </header>
