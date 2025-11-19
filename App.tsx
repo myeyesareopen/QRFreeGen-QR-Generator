@@ -273,7 +273,7 @@ const App: React.FC = () => {
 
             <div className="space-y-8">
               <div className="space-y-6">
-                <div className={`relative group w-full max-w-xl mx-auto bg-white rounded-3xl shadow-2xl shadow-slate-200 border border-slate-100 overflow-hidden transition-all duration-500 ${generatedQR ? 'p-8' : 'p-12 bg-slate-50'}`}>
+                <div className={`relative group w-full mx-auto bg-white rounded-3xl shadow-2xl shadow-slate-200 border border-slate-100 overflow-hidden transition-all duration-500 ${generatedQR ? 'p-8' : 'p-12 bg-slate-50'}`}>
                   
                   {/* Empty State */}
                   {!generatedQR && !loading && (
