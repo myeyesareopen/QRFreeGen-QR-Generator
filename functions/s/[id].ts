@@ -1,6 +1,9 @@
 interface Env {
   QR_KV: KVNamespace;
   QR_BUCKET: R2Bucket;
+  ASSETS: {
+    fetch: (request: Request) => Promise<Response>;
+  };
 }
 
 export const onRequestGet: PagesFunction<Env> = async (context) => {
@@ -10,7 +13,6 @@ export const onRequestGet: PagesFunction<Env> = async (context) => {
   if (!id) return new Response("Not Found", { status: 404 });
 
   const accept = request.headers.get('accept') || '';
-  const url = new URL(request.url);
 
   const metadataStr = await env.QR_KV.get(id);
   if (!metadataStr) {
@@ -19,9 +21,14 @@ export const onRequestGet: PagesFunction<Env> = async (context) => {
 
   // If the browser expects HTML, redirect to homepage with ?share
   if (!accept || accept.includes('text/html')) {
-    url.pathname = '/';
-    url.searchParams.set('share', id);
-    return Response.redirect(url.toString(), 302);
+    const rootUrl = new URL(request.url);
+    rootUrl.pathname = '/';
+    rootUrl.search = '';
+    const assetRequest = new Request(rootUrl.toString(), {
+      headers: new Headers(request.headers),
+      method: 'GET',
+    });
+    return env.ASSETS.fetch(assetRequest);
   }
 
   const metadata = JSON.parse(metadataStr);

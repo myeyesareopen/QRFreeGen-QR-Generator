@@ -36,7 +36,12 @@ type PagesFunction<Env = unknown, Params extends string = any, Data extends Reco
   context: EventContext<Env, Params, Data>
 ) => Response | Promise<Response>;
 
+interface AssetFetcher {
+  fetch(request: Request): Promise<Response>;
+}
+
 interface Env {
   QR_KV: KVNamespace;
   QR_BUCKET: R2Bucket;
+  ASSETS?: AssetFetcher;
 }
