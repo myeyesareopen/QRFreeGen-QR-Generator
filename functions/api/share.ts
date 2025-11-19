@@ -8,7 +8,7 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
   
   try {
     const body = await request.json() as any;
-    const { text, dataUrl, svgString } = body;
+    const { text, dataUrl } = body;
 
     if (!text || !dataUrl) {
       return new Response("Missing data", { status: 400 });

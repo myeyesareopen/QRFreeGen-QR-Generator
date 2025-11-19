@@ -14,8 +14,7 @@ import {
   Trash2,
   Github,
   Globe,
-  Share2,
-  CloudUpload
+  UploadCloud
 } from 'lucide-react';
 
 const App: React.FC = () => {
@@ -145,7 +144,7 @@ const App: React.FC = () => {
 
       if (!response.ok) throw new Error('Network response was not ok');
 
-      const data = await response.json();
+      const data: { url: string } = await response.json();
       setShareUrl(data.url);
       
       // Auto copy to clipboard
@@ -370,7 +369,7 @@ const App: React.FC = () => {
                   className="w-full border-green-200 hover:bg-green-50 text-green-700"
                   onClick={handleShare}
                   isLoading={isSharing}
-                  icon={isSharing ? null : <CloudUpload className="w-4 h-4" />}
+                  icon={isSharing ? null : <UploadCloud className="w-4 h-4" />}
                 >
                   {isSharing ? t.sharing : t.shareBtn}
                 </Button>
