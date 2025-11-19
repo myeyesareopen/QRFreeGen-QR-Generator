@@ -17,14 +17,9 @@ import {
   UploadCloud,
   ShieldCheck,
   ListChecks,
-  HelpCircle
+  HelpCircle,
+  Github
 } from 'lucide-react';
-
-interface ShareDataResponse extends ShareResponse {
-  dataUrl: string;
-  svgString: string;
-  text?: string;
-}
 
 const App: React.FC = () => {
   const [inputValue, setInputValue] = useState<string>('');
@@ -67,63 +62,6 @@ const App: React.FC = () => {
       document.title = `${t.appTitle} - ${t.heroTitleStart} ${t.heroTitleEnd}`;
     }
   }, [currentLang, t, isPrivacyRoute]);
-
-  // Load shared QR if visiting via /s/:id link
-  useEffect(() => {
-    if (isPrivacyRoute) {
-      return;
-    }
-    const pathMatch = window.location.pathname.match(/^\/s\/([^/?#]+)/i);
-    if (!pathMatch) {
-      return;
-    }
-    const shareParam = pathMatch[1];
-
-    let cancelled = false;
-    setLoading(true);
-    setError(null);
-
-    const loadSharedQr = async () => {
-      try {
-        const response = await fetch(`/api/share?id=${shareParam}`);
-        if (!response.ok) {
-          throw new Error('Share not found');
-        }
-        const data: ShareDataResponse = await response.json();
-        if (!data.dataUrl || !data.svgString) {
-          throw new Error('Invalid share data');
-        }
-        if (cancelled) return;
-        setGeneratedQR({
-          dataUrl: data.dataUrl,
-          svgString: data.svgString
-        });
-        if (typeof data.text === 'string') {
-          setQrContent(data.text);
-        } else {
-          setQrContent('');
-        }
-        setShareUrl(data.url);
-      } catch (err) {
-        if (!cancelled) {
-          setError(t.shareExpired);
-          setGeneratedQR(null);
-          setShareUrl(null);
-          setQrContent('');
-        }
-      } finally {
-        if (!cancelled) {
-          setLoading(false);
-        }
-      }
-    };
-
-    loadSharedQr();
-
-    return () => {
-      cancelled = true;
-    };
-  }, [currentLang, t.shareExpired, isPrivacyRoute]);
 
   const showToast = (message: string, type: 'success' | 'error' = 'success') => {
     setToast({ message, type });
@@ -273,6 +211,15 @@ const App: React.FC = () => {
                 </svg>
               </div>
             </div>
+            <a 
+              href="https://github.com/myeyesareopen/QRFreeGen-QR-Generator"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center p-2 rounded-md text-slate-500 hover:text-slate-800 hover:bg-slate-100 transition-colors"
+              aria-label="QRFreeGen GitHub repository"
+            >
+              <Github className="w-5 h-5" />
+            </a>
           </div>
         </div>
       </header>

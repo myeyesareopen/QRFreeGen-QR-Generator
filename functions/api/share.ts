@@ -163,35 +163,6 @@ export const onRequest: PagesFunction<Env> = async (context) => {
   const { request, env } = context;
   const url = new URL(request.url);
 
-  if (request.method === 'GET') {
-    const id = url.searchParams.get('id') || url.searchParams.get('share');
-    if (!id) {
-      return new Response(JSON.stringify({ error: 'Missing id' }), { status: 400, headers: { "Content-Type": "application/json" } });
-    }
-
-    const metadataStr = await env.QR_KV.get(id);
-    if (!metadataStr) {
-      return new Response(JSON.stringify({ error: 'Not Found' }), { status: 404, headers: { "Content-Type": "application/json" } });
-    }
-
-    const metadata = JSON.parse(metadataStr);
-    if (!metadata.dataUrl || !metadata.svgString) {
-      return new Response(JSON.stringify({ error: 'Incomplete share data' }), { status: 404, headers: { "Content-Type": "application/json" } });
-    }
-
-    return new Response(JSON.stringify({
-      id,
-      text: metadata.text,
-      dataUrl: metadata.dataUrl,
-      svgString: metadata.svgString,
-      url: `${url.origin}/s/${id}`,
-      created: metadata.created,
-      expiresAt: metadata.created ? metadata.created + (SHARE_TTL_SECONDS * 1000) : null
-    }), {
-      headers: { "Content-Type": "application/json" }
-    });
-  }
-
   if (request.method !== 'POST') {
     return new Response("Method Not Allowed", { status: 405 });
   }
