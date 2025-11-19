@@ -3,6 +3,7 @@ import { QRCodeResult, LanguageCode, ShareResponse } from './types';
 import { generateQRCode } from './services/qrService';
 import Button from './components/Button';
 import { Toast } from './components/Toaster';
+import PrivacyPage from './components/PrivacyPage';
 import { languages, translations } from './locales';
 import { 
   QrCode, 
@@ -51,18 +52,26 @@ const App: React.FC = () => {
   });
 
   const t = translations[currentLang];
+  const isPrivacyRoute = typeof window !== 'undefined' && window.location.pathname.startsWith('/privacy');
 
   // Update document title and HTML lang attribute when language changes
   useEffect(() => {
-    document.title = `${t.appTitle} - ${t.heroTitleStart} ${t.heroTitleEnd}`;
     document.documentElement.lang = currentLang;
     const langConfig = languages.find(l => l.code === currentLang);
     document.documentElement.dir = langConfig?.dir || 'ltr';
     localStorage.setItem('qrfreegen_lang', currentLang);
-  }, [currentLang, t]);
+    if (isPrivacyRoute) {
+      document.title = `${t.appTitle} - ${t.privacyLink}`;
+    } else {
+      document.title = `${t.appTitle} - ${t.heroTitleStart} ${t.heroTitleEnd}`;
+    }
+  }, [currentLang, t, isPrivacyRoute]);
 
   // Load shared QR if visiting via /s/:id link
   useEffect(() => {
+    if (isPrivacyRoute) {
+      return;
+    }
     const pathMatch = window.location.pathname.match(/^\/s\/([^/?#]+)/i);
     if (!pathMatch) {
       return;
@@ -107,7 +116,7 @@ const App: React.FC = () => {
     return () => {
       cancelled = true;
     };
-  }, [currentLang, t.shareExpired]);
+  }, [currentLang, t.shareExpired, isPrivacyRoute]);
 
   const showToast = (message: string, type: 'success' | 'error' = 'success') => {
     setToast({ message, type });
@@ -215,6 +224,10 @@ const App: React.FC = () => {
   };
 
   const isRtl = languages.find(l => l.code === currentLang)?.dir === 'rtl';
+
+  if (isPrivacyRoute) {
+    return <PrivacyPage currentLang={currentLang} setCurrentLang={setCurrentLang} t={t} isRtl={!!isRtl} />;
+  }
 
   return (
     <div className={`flex flex-col min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 ${isRtl ? 'rtl' : 'ltr'}`} dir={isRtl ? 'rtl' : 'ltr'}>
@@ -487,6 +500,11 @@ const App: React.FC = () => {
           </p>
           <p className="text-slate-400 text-xs mt-2">
             {t.footerPrivacy}
+          </p>
+          <p className="text-slate-400 text-xs mt-2">
+            <a href="/privacy" className="text-green-600 hover:text-green-700 font-medium">
+              {t.privacyLink}
+            </a>
           </p>
         </div>
       </footer>

@@ -23,6 +23,7 @@ export interface FAQItem {
 
 export interface Translation {
   appTitle: string;
+  privacyLink: string;
   howItWorks: string;
   heroTitleStart: string;
   heroTitleEnd: string;

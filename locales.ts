@@ -16,6 +16,7 @@ export const languages: { code: LanguageCode; name: string; dir?: 'rtl' | 'ltr' 
 export const translations: Record<LanguageCode, Translation> = {
   en: {
     appTitle: 'QRFreeGen',
+    privacyLink: 'Privacy Policy',
     howItWorks: 'How it works',
     heroTitleStart: 'Create your free',
     heroTitleEnd: 'QR Code instantly.',
@@ -71,6 +72,7 @@ export const translations: Record<LanguageCode, Translation> = {
   },
   zh: {
     appTitle: 'QRFreeGen',
+    privacyLink: '隐私政策',
     howItWorks: '使用说明',
     heroTitleStart: '立即创建您的',
     heroTitleEnd: '免费二维码',
@@ -126,6 +128,7 @@ export const translations: Record<LanguageCode, Translation> = {
   },
   es: {
     appTitle: 'QRFreeGen',
+    privacyLink: 'Política de privacidad',
     howItWorks: 'Cómo funciona',
     heroTitleStart: 'Crea tu código QR',
     heroTitleEnd: 'gratis al instante.',
@@ -181,6 +184,7 @@ export const translations: Record<LanguageCode, Translation> = {
   },
   hi: {
     appTitle: 'QRFreeGen',
+    privacyLink: 'गोपनीयता नीति',
     howItWorks: 'यह कैसे काम करता है',
     heroTitleStart: 'फ़्री QR कोड',
     heroTitleEnd: 'तुरंत बनाएँ।',
@@ -236,6 +240,7 @@ export const translations: Record<LanguageCode, Translation> = {
   },
   ar: {
     appTitle: 'QRFreeGen',
+    privacyLink: 'سياسة الخصوصية',
     howItWorks: 'كيف يعمل',
     heroTitleStart: 'أنشئ رمز QR',
     heroTitleEnd: 'مجانًا وفورًا.',
@@ -291,6 +296,7 @@ export const translations: Record<LanguageCode, Translation> = {
   },
   pt: {
     appTitle: 'QRFreeGen',
+    privacyLink: 'Política de Privacidade',
     howItWorks: 'Como funciona',
     heroTitleStart: 'Crie seu QR Code',
     heroTitleEnd: 'gratuito em instantes.',
@@ -346,6 +352,7 @@ export const translations: Record<LanguageCode, Translation> = {
   },
   bn: {
     appTitle: 'QRFreeGen',
+    privacyLink: 'গোপনীয়তা নীতি',
     howItWorks: 'কিভাবে কাজ করে',
     heroTitleStart: 'আপনার ফ্রি',
     heroTitleEnd: 'QR কোড তৈরি করুন।',
@@ -401,6 +408,7 @@ export const translations: Record<LanguageCode, Translation> = {
   },
   ru: {
     appTitle: 'QRFreeGen',
+    privacyLink: 'Политика конфиденциальности',
     howItWorks: 'Как это работает',
     heroTitleStart: 'Создайте бесплатный',
     heroTitleEnd: 'QR‑код за секунды.',
@@ -456,6 +464,7 @@ export const translations: Record<LanguageCode, Translation> = {
   },
   ja: {
     appTitle: 'QRFreeGen',
+    privacyLink: 'プライバシーポリシー',
     howItWorks: '使い方',
     heroTitleStart: '無料のQRコードを',
     heroTitleEnd: '今すぐ作成。',
@@ -511,6 +520,7 @@ export const translations: Record<LanguageCode, Translation> = {
   },
   fr: {
     appTitle: 'QRFreeGen',
+    privacyLink: 'Politique de confidentialité',
     howItWorks: 'Comment ça marche',
     heroTitleStart: 'Créez votre QR code',
     heroTitleEnd: 'gratuit en un instant.',
