@@ -272,43 +272,6 @@ const App: React.FC = () => {
             </div>
 
             <div className="space-y-8">
-              <div className="bg-white rounded-2xl shadow-xl shadow-slate-200/60 border border-slate-100 p-6 space-y-6">
-                <div className="space-y-2">
-                  <label htmlFor="qr-input" className="block text-sm font-semibold text-slate-700">
-                    {t.inputLabel}
-                  </label>
-                  <div className="relative">
-                    <textarea
-                      id="qr-input"
-                      value={inputValue}
-                      onChange={(e) => setInputValue(e.target.value)}
-                      placeholder={t.inputPlaceholder}
-                      dir="ltr" // Input content usually is LTR (URLs, etc) even in RTL mode, but can be auto.
-                      className={`w-full h-32 px-4 py-3 rounded-lg border ${error ? 'border-red-300 focus:ring-red-200' : 'border-slate-700 focus:border-green-500 focus:ring-green-500'} bg-slate-800 text-white focus:ring-2 transition-all resize-none font-medium placeholder:text-slate-400`}
-                    />
-                    {inputValue && (
-                      <button 
-                        onClick={handleClear}
-                        className={`absolute top-3 ${isRtl ? 'left-3' : 'right-3'} text-slate-400 hover:text-white p-1 rounded-full hover:bg-slate-700 transition-colors`}
-                        title={t.clearTitle}
-                      >
-                        <Trash2 className="w-4 h-4" />
-                      </button>
-                    )}
-                  </div>
-                  {error && <p className="text-sm text-red-600 mt-1">{error}</p>}
-                </div>
-
-                <Button 
-                  onClick={handleGenerate} 
-                  isLoading={loading} 
-                  className="w-full py-3 text-base shadow-green-200 shadow-lg hover:shadow-green-300"
-                  icon={<Zap className="w-4 h-4" />}
-                >
-                  {t.generateBtn}
-                </Button>
-              </div>
-
               <div className="space-y-6">
                 <div className={`relative group w-full max-w-xl mx-auto bg-white rounded-3xl shadow-2xl shadow-slate-200 border border-slate-100 overflow-hidden transition-all duration-500 ${generatedQR ? 'p-8' : 'p-12 bg-slate-50'}`}>
                   
@@ -423,6 +386,43 @@ const App: React.FC = () => {
                     )}
                   </div>
                 )}
+              </div>
+
+              <div className="bg-white rounded-2xl shadow-xl shadow-slate-200/60 border border-slate-100 p-6 space-y-6">
+                <div className="space-y-2">
+                  <label htmlFor="qr-input" className="block text-sm font-semibold text-slate-700">
+                    {t.inputLabel}
+                  </label>
+                  <div className="relative">
+                    <textarea
+                      id="qr-input"
+                      value={inputValue}
+                      onChange={(e) => setInputValue(e.target.value)}
+                      placeholder={t.inputPlaceholder}
+                      dir="ltr" // Input content usually is LTR (URLs, etc) even in RTL mode, but can be auto.
+                      className={`w-full h-32 px-4 py-3 rounded-lg border ${error ? 'border-red-300 focus:ring-red-200' : 'border-slate-700 focus:border-green-500 focus:ring-green-500'} bg-slate-800 text-white focus:ring-2 transition-all resize-none font-medium placeholder:text-slate-400`}
+                    />
+                    {inputValue && (
+                      <button 
+                        onClick={handleClear}
+                        className={`absolute top-3 ${isRtl ? 'left-3' : 'right-3'} text-slate-400 hover:text-white p-1 rounded-full hover:bg-slate-700 transition-colors`}
+                        title={t.clearTitle}
+                      >
+                        <Trash2 className="w-4 h-4" />
+                      </button>
+                    )}
+                  </div>
+                  {error && <p className="text-sm text-red-600 mt-1">{error}</p>}
+                </div>
+
+                <Button 
+                  onClick={handleGenerate} 
+                  isLoading={loading} 
+                  className="w-full py-3 text-base shadow-green-200 shadow-lg hover:shadow-green-300"
+                  icon={<Zap className="w-4 h-4" />}
+                >
+                  {t.generateBtn}
+                </Button>
               </div>
             </div>
           </div>
