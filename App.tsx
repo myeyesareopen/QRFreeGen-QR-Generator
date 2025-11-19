@@ -59,13 +59,13 @@ const App: React.FC = () => {
     localStorage.setItem('qrfreegen_lang', currentLang);
   }, [currentLang, t]);
 
-  // Load shared QR if visiting via ?share=ID link
+  // Load shared QR if visiting via /s/:id link
   useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    const shareParam = params.get('share');
-    if (!shareParam) {
+    const pathMatch = window.location.pathname.match(/^\/s\/([^/?#]+)/i);
+    if (!pathMatch) {
       return;
     }
+    const shareParam = pathMatch[1];
 
     let cancelled = false;
     setLoading(true);
@@ -360,7 +360,6 @@ const App: React.FC = () => {
                   {/* Share Link Display */}
                   {shareUrl && (
                      <div className="mt-4 w-full bg-green-50 border border-green-100 rounded-lg p-3 animate-in slide-in-from-top-2">
-                        <p className="text-xs font-medium text-green-700 text-center">{t.shareDesc}</p>
                         <p className="text-[11px] text-green-500 text-center mb-2">{t.shareValidity}</p>
                         <div className="flex items-center gap-2 bg-white border border-green-200 rounded px-2 py-1.5">
                           <input 

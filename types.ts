@@ -42,7 +42,6 @@ export interface Translation {
   clearTitle: string;
   shareBtn: string;
   shareTitle: string;
-  shareDesc: string;
   shareSuccess: string;
   shareFail: string;
   sharing: string;

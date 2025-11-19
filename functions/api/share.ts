@@ -30,7 +30,7 @@ export const onRequest: PagesFunction<Env> = async (context) => {
       text: metadata.text,
       dataUrl: metadata.dataUrl,
       svgString: metadata.svgString,
-      url: `${url.origin}/?share=${id}`,
+      url: `${url.origin}/s/${id}`,
       created: metadata.created,
       expiresAt: metadata.created ? metadata.created + (SHARE_TTL_SECONDS * 1000) : null
     }), {
@@ -80,7 +80,7 @@ export const onRequest: PagesFunction<Env> = async (context) => {
     });
 
     // 3. Return the share URL pointing to homepage with query param
-    const shareUrl = `${url.origin}/?share=${id}`;
+    const shareUrl = `${url.origin}/s/${id}`;
     
     return new Response(JSON.stringify({ id, url: shareUrl, expiresIn: SHARE_TTL_SECONDS }), {
       headers: { "Content-Type": "application/json" }
